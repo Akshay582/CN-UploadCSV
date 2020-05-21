@@ -35,6 +35,19 @@ app.get('/', function (req, res) {
   res.render('home');
 });
 
+app.post('/upload', function (req, res) {
+  upload(req, res, (err) => {
+    if (err) {
+      res.render('index', {
+        msg: err,
+      });
+    } else {
+      console.log(req.file);
+      res.send('test');
+    }
+  });
+});
+
 app.listen(PORT, function (err) {
   if (err) {
     return console.error('Encountered error while running server: ', err);
