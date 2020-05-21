@@ -1,0 +1,11 @@
+{
+  "name": "cnuploadcsv",
+  "version": "1.0.0",
+  "description": "A Web App for basic functionality of uploading CSV and showing its data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akshay Mittal",
+  "license": "ISC"
+}
