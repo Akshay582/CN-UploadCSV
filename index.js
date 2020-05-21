@@ -3,7 +3,23 @@ const multer = require('multer');
 const ejs = require('ejs');
 const path = require('path');
 
-// Init app variable
+// Set Storage Engine
+const storage = multer.diskStorage({
+  destination: './public/uploads/',
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+// Init the upload variable
+const upload = multer({
+  storage,
+}).single('myCSV');
+
+// Init app
 const app = express();
 
 const PORT = 3000;
