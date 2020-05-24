@@ -1,0 +1,22 @@
+body {
+  padding: 0 20px;
+}
+
+.cotainer {
+  margin-bottom: 30px;
+}
+
+#flex {
+  display: flex;
+  flex-direction: row;
+}
+
+#rendered-file {
+  border-left: 3px groove;
+  padding-left: 30px;
+  margin-left: 30px;
+}
+
+#csv-files-list {
+  min-width: 20vw;
+}

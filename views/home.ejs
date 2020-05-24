@@ -3,25 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/home.css" />
     <!-- Compiled and minified CSS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <style>
-      body {
-        padding: 0 20px;
-      }
-    </style>
     <title>File Upload</title>
   </head>
   <body>
+    <nav class="white">
+      <div class="nav-wrapper black">
+        <a href="#" class="brand-logo">FILE UPLOADER</a>
+        <ul class="hide-on-med-and-down right">
+          <li>
+            <div class="center row">
+              <div class="col s12">
+                <div class="row" id="topbarsearch">
+                  <div class="input-field col s6 s12 red-text">
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      id="autocomplete-input"
+                      class="autocomplete red-text"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <div class="cotainer">
-      <h1>File Upload</h1>
       <%= typeof msg != 'undefined' ? msg : '' %>
       <form action="/upload" method="POST" enctype="multipart/form-data">
         <div class="file-field input-field">
-          <div class="btn blue">
+          <div class="btn-large blue">
             <span>File</span>
             <input name="myCSV" type="file" />
           </div>
@@ -29,8 +47,47 @@
             <input class="file-path validate" type="text" />
           </div>
         </div>
-        <button type="submit" class="btn">Submit</button>
+        <button type="submit" class="btn black">Submit</button>
       </form>
+    </div>
+    <div id="flex">
+      <aside id="csv-files-list">
+        <h4>Please choose a file:</h4>
+        <form action="/selected" method="POST">
+          <label>List of files:</label>
+          <select
+            class="browser-default"
+            name="selected-csv-file"
+            id="selected-csv-file"
+          >
+            <option value="" disabled selected>Choose the file here:</option>
+            <% if(locals.csvList != undefined) {%> <% for ( file of csvList )
+            {%>
+            <option value="<%= file %>"><%= file %></option>
+            <% } %> <% } %>
+          </select>
+          <br /><br />
+          <input type="submit" value="Submit" />
+        </form>
+      </aside>
+      <section id="rendered-file">
+        <table style="width: 60vw;">
+          <tr>
+            <% if(locals.csvData != undefined) {%> <% for ( let i = 0; i <
+            csvData[0].length; i++ ) {%>
+            <th><%= csvData[0][i] %></th>
+            <% } %> <% } %>
+          </tr>
+          <% if(locals.csvData != undefined) {%> <% for ( data of
+          csvData.slice(1) ) {%>
+          <tr>
+            <% for ( let j = 0; j < data.length; j++ ) {%>
+            <td><%= data[j] %></td>
+            <% } %>
+          </tr>
+          <% } %> <% } %>
+        </table>
+      </section>
     </div>
     <!-- Minified JQuery for running Materialize -->
     <script
