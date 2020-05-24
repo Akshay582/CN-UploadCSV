@@ -73,19 +73,19 @@
       <section id="rendered-file">
         <table style="width: 60vw;">
           <tr>
-            <% if(locals.csvData != undefined) {%> <% for ( let i = 0; i <
-            csvData[0].length; i++ ) {%>
+            <% if(locals.csvData != undefined) {%> <% if(locals.csvData.length
+            != 0) {%> <% for ( let i = 0; i < csvData[0].length; i++ ) {%>
             <th><%= csvData[0][i] %></th>
-            <% } %> <% } %>
+            <% } %> <% } %> <% } %>
           </tr>
-          <% if(locals.csvData != undefined) {%> <% for ( data of
-          csvData.slice(1) ) {%>
+          <% if(locals.csvData != undefined) {%> <% if(locals.csvData.length !=
+          0) {%> <% for ( data of csvData.slice(1) ) {%>
           <tr>
             <% for ( let j = 0; j < data.length; j++ ) {%>
             <td><%= data[j] %></td>
             <% } %>
           </tr>
-          <% } %> <% } %>
+          <% } %> <% } %> <% } %>
         </table>
       </section>
     </div>

@@ -24,21 +24,7 @@ const upload = multer( {
 
 // Read one file's content
 
-const csvData = [];
-
-const filePath = "C:/Users/befor/Desktop/CNUploadCSV/public/uploads/myCSV-1590250493364.csv";
-
-fs.createReadStream( filePath )
-  .pipe(
-    parse( {
-      delimiter: ','
-    } )
-  )
-  .on( 'data', function ( datarow ) {
-    csvData.push( datarow );
-  } )
-  .on( 'end', function () {
-  } )
+let csvData = [];
 
 let csvList = [];
 
@@ -67,6 +53,7 @@ module.exports.selected = function ( req, res ) {
     .on( 'data', function ( datarow ) {
       data.push( datarow );
     } ).on( 'end', function () {
+      csvData = data;
       res.render( 'home', {
         csvList,
         csvData: data,
@@ -90,12 +77,7 @@ module.exports.upload = function ( req, res ) {
           csvData,
         } );
       } else {
-        res.render( 'home', {
-          msg: 'File uploaded.',
-          csvList,
-          csvData,
-          file: `uploads/${req.file.filename}`,
-        } );
+        res.redirect( '/' );
       }
     }
   } );
